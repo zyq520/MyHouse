@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.house.dao.ArticleDAO" >
+  <resultMap id="BaseResultMap" type="com.house.model.Article" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="is_delete" property="isDelete" jdbcType="CHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="thumbnail" property="thumbnail" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="created_by" property="createdBy" jdbcType="BIGINT" />
+    <result column="modify_by" property="modifyBy" jdbcType="BIGINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.house.model.Article" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, title, create_time, modify_time, is_delete, sort, thumbnail, remark, created_by, 
+    modify_by
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  
+<select id="findById" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from article
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="delete" parameterType="java.lang.Long" >
+    delete from article
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.house.model.Article" >
+    insert into article (id, title, create_time,
+      modify_time, is_delete, sort,
+      thumbnail, remark, create_user_id,
+      modify_user_id, content)
+    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+      #{modifyTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=CHAR}, #{sort,jdbcType=INTEGER},
+      #{thumbnail,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createUserId,jdbcType=BIGINT},
+      #{modifyUserId,jdbcType=BIGINT}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+
+  <update id="update" parameterType="com.house.model.Article" >
+    update article
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=CHAR},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="thumbnail != null" >
+        thumbnail = #{thumbnail,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="modifyUserId != null" >
+        modify_user_id = #{modifyUserId,jdbcType=BIGINT},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="query" resultMap="ResultMapWithBLOBs" parameterType="com.house.model.Article">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from article
+    where 1 = 1
+    <if test="title != null" >
+      AND title like CONCAT('%',#{title},'%')
+    </if>
+    <if test="createTime != null" >
+      AND create_time = #{createTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="modifyTime != null" >
+      AND modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="isDelete != null" >
+      AND is_delete = #{isDelete,jdbcType=CHAR}
+    </if>
+    <if test="sort != null" >
+      AND sort = #{sort,jdbcType=INTEGER}
+    </if>
+    <if test="thumbnail != null" >
+      AND thumbnail = #{thumbnail,jdbcType=VARCHAR}
+    </if>
+    <if test="remark != null" >
+      AND remark = #{remark,jdbcType=VARCHAR}
+    </if>
+    <if test="createUserId != null" >
+      AND create_user_id = #{createUserId,jdbcType=BIGINT}
+    </if>
+    <if test="modifyUserId != null" >
+      AND modify_user_id = #{modifyUserId,jdbcType=BIGINT}
+    </if>
+    <if test="content != null" >
+      AND content like CONCAT('%',#{content},'%')
+    </if>
+</select>
+  
+</mapper>

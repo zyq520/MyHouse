@@ -21,9 +21,7 @@ public class BaseController {
     @RequestMapping("/test")
     @ResponseBody
     public String test(){
-        Long mark=1L;
-        Article a= articleService.getById(mark);
-        LOG.info(JsonUtil.toString(a));
-        return "suscces";
+        Article a= articleService.getById(1L);
+        return JsonUtil.toString(a);
     }
 }

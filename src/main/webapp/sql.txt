@@ -1,37 +1,41 @@
-User
-userNmae,passWord
+User(用户)
+id,createTime(创建时间),userName(用户名),passWord(密码),phone(电话),status(状态:0正常1注销)
 
-UserRoleRelation
-userId,roleId
+UserRoleRelation(用户角色关系)
+id,userId(用户id),roleId(角色id)
 
-Role
-roleName
+Role(角色)
+id,createTime(创建时间),desc(角色描述),roleName(角色名称),status(状态:0正常1注销)
 
-RolePermissionRelation
-roleId,permissionId
+RolePermissionRelation(角色权限关系)
+id,roleId(角色id),permissionId(权限id)
 
-Permission
-permissionName,url,
+Permission(权限)
+id,desc(权限描述),permissionName(权限名称),url(权限对应的url),parentId(父id),status(状态:0正常1注销)
 
-UserToken
-creatTime,tokenValue
+UserToken(用户token)
+id,createTime(创建时间),tokenValue(token值),status(状态:0正常1注销)
 
-House
-name
+House(房子)
+id,name(出租房名称),status(状态:0正常1注销)
 
-HouseRoomRleation
-houseId,roomId
+HouseRoomRleation(房子房间关系)
+id,houseId(出租房id),roomId(房间id)
 
-Room
-roomNum,price
+Room(房间)
+id,roomNum(房间号),price(出租价格/每月),rentInterval(收租间隔 月/次),status(状态:0正常1注销)
 
-水电
+RoomExpand(房间信息扩充)
+id,createTime(创建时间),roomId(房间id),waterNum(水度数),electricityNum(电度数),status(状态:0正常1注销)
 
-RoomTenantsRelation
-roomId,tenantsId
+Dictionary(字典)
+id,dicName(字典key),dicValue(字典value),parentId(父id/无默认1),status(状态:0正常1注销)
 
-Tenants
-name,phone
+RoomTenantsRelation(房间租客关系)
+id,roomId(房间id),tenantsId(租客信息id)
 
-Bill
-roomId,水度数,水费,电读书,电费,房租钱,时间
+Tenants(租客信息)
+id,name(租客姓名),phone(租客电话),idCard(租客身份证号)
+
+Bill(流水)
+id,createTime(创建时间),roomId(房间id),waterPrice(水费),electricityPrice(电费),rentMoney(房租钱)

@@ -1,5 +1,5 @@
 User(用户)
-id,createTime(创建时间),userName(用户名),passWord(密码),phone(电话),status(状态:0正常1注销)
+id,createTime(创建时间),userName(用户名),passWord(密码),phone(电话),openId(微信openId),status(状态:0正常1注销)
 
 UserRoleRelation(用户角色关系)
 id,userId(用户id),roleId(角色id)
@@ -17,13 +17,13 @@ UserToken(用户token)
 id,createTime(创建时间),tokenValue(token值),status(状态:0正常1注销)
 
 House(房子)
-id,name(出租房名称),status(状态:0正常1注销)
+id,createTime(创建时间),name(出租房名称),status(状态:0正常1注销)
 
 HouseRoomRleation(房子房间关系)
 id,houseId(出租房id),roomId(房间id)
 
 Room(房间)
-id,roomNum(房间号),price(出租价格/每月),rentInterval(收租间隔 月/次),status(状态:0正常1注销)
+id,createTime(创建时间),roomNum(房间号),price(出租价格/每月),rentInterval(收租间隔 月/次),status(状态:0正常1注销)
 
 RoomExpand(房间信息扩充)
 id,createTime(创建时间),roomId(房间id),waterNum(水度数),electricityNum(电度数),status(状态:0正常1注销)
@@ -35,7 +35,7 @@ RoomTenantsRelation(房间租客关系)
 id,roomId(房间id),tenantsId(租客信息id)
 
 Tenants(租客信息)
-id,name(租客姓名),phone(租客电话),idCard(租客身份证号)
+id,name(租客姓名),phone(租客电话),idCard(租客身份证号),status(状态:0正常1注销)
 
 Bill(流水)
 id,createTime(创建时间),roomId(房间id),waterPrice(水费),electricityPrice(电费),rentMoney(房租钱)
